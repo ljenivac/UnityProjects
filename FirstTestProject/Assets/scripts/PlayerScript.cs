@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
             WeaponScript weapon = GetComponent<WeaponScript>();
             if (weapon != null)
                 weapon.Attack(false);
+            SoundEffectsHelper.Instance.MakePlayerShotSound();
         }
 
         float inputX = Input.GetAxis("Horizontal");

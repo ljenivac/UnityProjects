@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3164338247361662771}
   - component: {fileID: 8786496086615881786}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PlayerShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,5 +156,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91770564659176489f2cdb79b4a23c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 10, y: 10}
+  speed: {x: 15, y: 10}
   direction: {x: -1, y: 0}

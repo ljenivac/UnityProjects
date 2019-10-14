@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
             if (weapon != null && weapon.CanAttack)
             {
                 weapon.Attack(true);
+                SoundEffectsHelper.Instance.MakeEnemyShotSound();
             }
         }
     }
