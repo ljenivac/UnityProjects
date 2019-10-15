@@ -59,5 +59,13 @@ public class PlayerScript : MonoBehaviour
             HealthScript playerHealth = this.GetComponent<HealthScript>();
             if (playerHealth != null) playerHealth.Damage(1);
         }
+
+        /*TimeStopScript item = collision.gameObject.GetComponent<TimeStopScript>();
+        if(item != null)
+        {
+            System.Console.WriteLine("hit an item");
+            Destroy(item.gameObject);
+            return;
+        }*/
     }
 }

@@ -33,6 +33,7 @@ public class HealthScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
+
         // Is this a shot?
         ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();
         if (shot != null)
@@ -45,6 +46,17 @@ public class HealthScript : MonoBehaviour
                 // Destroy the shot
                 Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
             }
+            return;
+        }
+
+        //is this an item?
+        TimeStopScript item = otherCollider.gameObject.GetComponent<TimeStopScript>();
+
+        if(item != null && isEnemy == false)
+        {
+            item.StopTime();
+            Destroy(item.gameObject);
+            return;
         }
     }
 }

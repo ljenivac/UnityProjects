@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using UnityEngine;
 
 public class ScrollingScript : MonoBehaviour
@@ -25,14 +26,20 @@ public class ScrollingScript : MonoBehaviour
     /// </summary>
     public bool isLooping = false;
 
+    public static bool isTimeStopped = false;
+
     /// <summary>
     /// 2 - List of children with a renderer.
     /// </summary>
     private List<SpriteRenderer> backgroundPart;
 
+    private static int timeCount;
+
     // 3 - Get all the children
     void Start()
     {
+
+        timeCount = System.DateTime.Now.Second;
         // For infinite background only
         if (isLooping)
         {
@@ -63,6 +70,18 @@ public class ScrollingScript : MonoBehaviour
 
     void Update()
     {
+        if (isTimeStopped)
+        {
+            int currentTime = System.DateTime.Now.Second;
+            if ((currentTime - timeCount) >= 2)
+                isTimeStopped = false;
+            else
+                return;
+        }
+
+        timeCount = System.DateTime.Now.Second;
+        if (timeCount > 57)
+            timeCount -= 60;
         // Movement
         Vector3 movement = new Vector3(
           speed.x * direction.x,
