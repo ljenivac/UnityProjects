@@ -12,6 +12,8 @@ public class WeaponScript : MonoBehaviour
     /// Projectile prefab for shooting
     /// </summary>
     public Transform shotPrefab;
+    public Transform laserPrefab;
+    private Transform laserTransform;
 
     /// <summary>
     /// Cooldown in seconds between two shots
@@ -70,6 +72,28 @@ public class WeaponScript : MonoBehaviour
                 move.direction = this.transform.right; // towards in 2D space is the right of the sprite
             }
         }
+    }
+
+    public void AttackLaser()
+    {
+        if (CanAttack)
+        {
+            shootCooldown = shootingRate;
+
+            // Create a new shot
+            laserTransform = Instantiate(laserPrefab) as Transform;
+
+            // Assign position
+            laserTransform.position = transform.position;
+
+            // The is enemy property
+            LaserScript laser = laserTransform.gameObject.GetComponent<LaserScript>();
+        }
+    }
+
+    public void DestroyLaser()
+    {
+        Destroy(laserTransform);
     }
 
     /// <summary>
