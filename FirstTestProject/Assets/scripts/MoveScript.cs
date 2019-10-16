@@ -52,20 +52,23 @@ public class MoveScript : MonoBehaviour
         //if (timeCount > 57)
         //    timeCount -= 60;
         ShotScript shot = gameObject.GetComponent<ShotScript>();
+        HomingShotScript homingShot = gameObject.GetComponent<HomingShotScript>();
         canMove = false;
         if (shot != null)
             canMove = !shot.isEnemyShot;
+        if (homingShot != null)
+            canMove = true;
 
         if (isTimeStopped && !canMove)
         {
-            Debug.Log("Time Stopped");
+            //Debug.Log("Time Stopped");
             if (rigidbodyComponent == null)
                 rigidbodyComponent = GetComponent<Rigidbody2D>();
             rigidbodyComponent.velocity = zeroMovement;
         }
         else
         {
-            Debug.Log("Time Not Stopped");
+            //Debug.Log("Time Not Stopped");
             if (rigidbodyComponent == null)
                 rigidbodyComponent = GetComponent<Rigidbody2D>();
             rigidbodyComponent.velocity = movement;

@@ -12,8 +12,8 @@ public class WeaponScript : MonoBehaviour
     /// Projectile prefab for shooting
     /// </summary>
     public Transform shotPrefab;
-    public Transform laserPrefab;
-    private Transform laserTransform;
+    public Transform homingShotPrefab;
+    private Transform homingShotTransform;
 
     /// <summary>
     /// Cooldown in seconds between two shots
@@ -74,26 +74,26 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
-    public void AttackLaser()
+    public void AttackHomingShot()
     {
         if (CanAttack)
         {
             shootCooldown = shootingRate;
 
             // Create a new shot
-            laserTransform = Instantiate(laserPrefab) as Transform;
+            homingShotTransform = Instantiate(homingShotPrefab) as Transform;
 
             // Assign position
-            laserTransform.position = transform.position;
+            homingShotTransform.position = transform.position;
 
-            // The is enemy property
-            LaserScript laser = laserTransform.gameObject.GetComponent<LaserScript>();
+            MoveScript move = homingShotTransform.gameObject.GetComponent<MoveScript>();
+            if (move != null)
+            {
+                //Debug.Log("Homing missile");
+                move.direction = this.transform.up; // towards in 2D space is the up of the sprite
+                //move.direction = new Vector2(0, 1); // towards in 2D space is the up of the sprite
+            }
         }
-    }
-
-    public void DestroyLaser()
-    {
-        Destroy(laserTransform);
     }
 
     /// <summary>

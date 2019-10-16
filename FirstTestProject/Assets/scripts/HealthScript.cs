@@ -49,6 +49,24 @@ public class HealthScript : MonoBehaviour
             return;
         }
 
+        HomingShotScript homingShot = otherCollider.gameObject.GetComponent<HomingShotScript>();
+        if (homingShot != null)
+        {
+            Debug.Log("homing shot hit!");
+            // Avoid friendly fire
+            if (isEnemy)
+            {
+                Damage(homingShot.damage);
+
+                // Destroy the shot
+                Destroy(homingShot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
+            }
+            return;
+        }
+        else
+            Debug.Log("homing shot not hit!");
+
+
         //is this an item?
         TimeStopScript item = otherCollider.gameObject.GetComponent<TimeStopScript>();
 

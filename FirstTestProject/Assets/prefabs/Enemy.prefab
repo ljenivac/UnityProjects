@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 114519649211643038}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 3164338247361662783, guid: ecfc93c74d627e045a03b093e4fcc8d7,
     type: 3}
+  laserPrefab: {fileID: 0}
   shootingRate: 0.75
 --- !u!1 &3801332906943219848
 GameObject:
@@ -268,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 3164338247361662783, guid: ecfc93c74d627e045a03b093e4fcc8d7,
     type: 3}
+  laserPrefab: {fileID: 0}
   shootingRate: 0.75
 --- !u!1 &8632164628663797462
 GameObject:
@@ -314,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 3164338247361662783, guid: ecfc93c74d627e045a03b093e4fcc8d7,
     type: 3}
+  laserPrefab: {fileID: 0}
   shootingRate: 0.75
 --- !u!1001 &8788837650328449235
 PrefabInstance:
@@ -322,11 +325,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1945017525905671011}
     m_Modifications:
-    - target: {fileID: 1436127871428252701, guid: 730e9da836155c94b8ba784aef2148fe,
-        type: 3}
-      propertyPath: m_Name
-      value: Weapon
-      objectReference: {fileID: 0}
     - target: {fileID: 1436127871428252703, guid: 730e9da836155c94b8ba784aef2148fe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -391,6 +389,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 2.8571427
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436127871428252701, guid: 730e9da836155c94b8ba784aef2148fe,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730e9da836155c94b8ba784aef2148fe, type: 3}

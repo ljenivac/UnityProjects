@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         bool shoot = Input.GetButtonDown("Fire1");
-        bool laserShoot = Input.GetButtonDown("Fire2");
+        bool homingShoot = Input.GetButtonDown("Fire2");
 
         if(shoot)
         {
@@ -29,18 +29,12 @@ public class PlayerScript : MonoBehaviour
             SoundEffectsHelper.Instance.MakePlayerShotSound();
         }
 
-        if (laserShoot)
+        if (homingShoot)
         {
             WeaponScript weapon = GetComponent<WeaponScript>();
             if (weapon != null)
-                weapon.AttackLaser();
+                weapon.AttackHomingShot();
             SoundEffectsHelper.Instance.MakePlayerShotSound();
-        }
-        else
-        {
-            WeaponScript weapon = GetComponent<WeaponScript>();
-            if (weapon != null)
-                weapon.DestroyLaser();
         }
 
         float inputX = Input.GetAxis("Horizontal");
