@@ -5,9 +5,15 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     public Vector2 speed = new Vector2(50, 50);
+    private Vector2 origSpeed = new Vector2(50, 50);
 
     private Vector2 movement;
     private Rigidbody2D rigidbodyComponent;
+
+    void Start()
+    {
+        origSpeed = speed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,6 +45,23 @@ public class PlayerScript : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+
+        if (transform.position.x < Camera.main.transform.position.x && System.Math.Abs(transform.position.x - Camera.main.transform.position.x) > 17)
+            if (inputX < 0)
+                inputX = 0;
+
+        if (transform.position.x > Camera.main.transform.position.x && System.Math.Abs(transform.position.x - Camera.main.transform.position.x) > 17)
+            if (inputX > 0)
+                inputX = 0;
+
+        if (transform.position.y < Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 8)
+            if (inputY < 0)
+                inputY = 0;
+
+        if (transform.position.y > Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 8)
+            if (inputY > 0)
+                inputY = 0;
+
 
         movement = new Vector2(
             speed.x * inputX,

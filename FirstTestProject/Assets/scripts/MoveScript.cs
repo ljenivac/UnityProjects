@@ -7,38 +7,37 @@ public class MoveScript : MonoBehaviour
 
     public Vector2 speed = new Vector2(10, 10);
     public Vector2 direction = new Vector2(-1, 0);
-    public Vector2 zeroMovement = new Vector2(0, 0);
+    private Vector2 zeroMovement = new Vector2(0, 0);
     public static bool isTimeStopped = false;
 
     private Vector2 movement;
     private Rigidbody2D rigidbodyComponent;
     private int timeCount;
-    private Vector2 originalSpeed;
+    private bool canMove;
 
     void Start()
     {
         timeCount = System.DateTime.Now.Second;
-        originalSpeed = speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isTimeStopped)
-        {
-            Debug.Log("Move Script time stopped!");
-            int currentTime = System.DateTime.Now.Second;
-            if ((currentTime - timeCount) >= 3)
-                isTimeStopped = false;
 
-            speed = new Vector2(0, 0);
-            //Debug.Log("movement = " + movement);
-            Debug.Log("timeCount = " + timeCount);
-            Debug.Log("CurrentTime = " + currentTime);
-            return;
+        if (isTimeStopped && !canMove)
+        {
+            int currentTime = System.DateTime.Now.Second;
+            if ((currentTime - timeCount) >= 2)
+                isTimeStopped = false;
+            else
+                return;
         }
-        else
-            speed = originalSpeed;
+
+        timeCount = System.DateTime.Now.Second;
+        if (timeCount > 57)
+            timeCount -= 60;
+        //else
+        //  speed = originalSpeed;
 
         movement = new Vector2(
                 speed.x * direction.x,
@@ -52,19 +51,26 @@ public class MoveScript : MonoBehaviour
         //timeCount = System.DateTime.Now.Second;
         //if (timeCount > 57)
         //    timeCount -= 60;
-        if (isTimeStopped)
+        ShotScript shot = gameObject.GetComponent<ShotScript>();
+        canMove = false;
+        if (shot != null)
+            canMove = !shot.isEnemyShot;
+
+        if (isTimeStopped && !canMove)
         {
+            Debug.Log("Time Stopped");
             if (rigidbodyComponent == null)
                 rigidbodyComponent = GetComponent<Rigidbody2D>();
             rigidbodyComponent.velocity = zeroMovement;
         }
         else
         {
+            Debug.Log("Time Not Stopped");
             if (rigidbodyComponent == null)
                 rigidbodyComponent = GetComponent<Rigidbody2D>();
             rigidbodyComponent.velocity = movement;
         }
-            Debug.Log("movement of " + gameObject.name + " = " + movement);
+          //  Debug.Log("movement of " + gameObject.name + " = " + movement);
         //if (rigidbodyComponent == null)
         //    rigidbodyComponent = GetComponent<Rigidbody2D>();
         //rigidbodyComponent.velocity = movement;
