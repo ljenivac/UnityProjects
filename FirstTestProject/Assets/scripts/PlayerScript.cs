@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
 
     private Vector2 movement;
     private Rigidbody2D rigidbodyComponent;
+    public GameObject restartButton;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class PlayerScript : MonoBehaviour
         movement = new Vector2(
             speed.x * inputX,
             speed.y * inputY);
+        //restartButton.SetActive(true);
     }
 
     void FixedUpdate()
@@ -88,6 +90,9 @@ public class PlayerScript : MonoBehaviour
         if (damagePlayer)
         {
             HealthScript playerHealth = this.GetComponent<HealthScript>();
+            if(playerHealth.hp == 1)
+                restartButton.SetActive(true);
+
             if (playerHealth != null) playerHealth.Damage(1);
         }
 
@@ -98,5 +103,12 @@ public class PlayerScript : MonoBehaviour
             Destroy(item.gameObject);
             return;
         }*/
+    }
+    
+    void OnDestroy()
+    {
+        restartButton.SetActive(true);
+        //RestartScript restart = restartButton.GetComponent<RestartScript>();
+        //restart.Enable();
     }
 }

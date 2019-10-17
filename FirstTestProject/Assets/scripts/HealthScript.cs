@@ -27,6 +27,16 @@ public class HealthScript : MonoBehaviour
             SpecialEffectsHelper.Instance.Explosion(transform.position);
             SoundEffectsHelper.Instance.MakeExplosionSound();
             // Dead!
+            PlayerScript player = GetComponent<PlayerScript>();
+            if(player != null)
+            {
+                //GameObject restartObject = GameObject.FindWithTag("RestartButton");
+                //if(restartObject != null)
+                //    RestartScript restart = restartObject.GetComponent<RestartScript>();
+                //if(restart != null)
+                //    restart.Enable();
+                RestartScript.active = true;
+            }
             Destroy(gameObject);
         }
     }
@@ -45,6 +55,7 @@ public class HealthScript : MonoBehaviour
 
                 // Destroy the shot
                 Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
+                ScoreScript.scoreValue += 10;
             }
             return;
         }
@@ -60,6 +71,7 @@ public class HealthScript : MonoBehaviour
 
                 // Destroy the shot
                 Destroy(homingShot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
+                ScoreScript.scoreValue += 10;
             }
             return;
         }
