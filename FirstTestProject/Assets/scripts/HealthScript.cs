@@ -55,7 +55,8 @@ public class HealthScript : MonoBehaviour
 
                 // Destroy the shot
                 Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
-                ScoreScript.scoreValue += 10;
+                if(!shot.isEnemyShot)
+                    ScoreScript.scoreValue += 10;
             }
             return;
         }

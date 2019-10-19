@@ -49,11 +49,11 @@ public class PlayerScript : MonoBehaviour
             if (inputX > 0)
                 inputX = 0;
 
-        if (transform.position.y < Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 8)
+        if (transform.position.y < Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 11)
             if (inputY < 0)
                 inputY = 0;
 
-        if (transform.position.y > Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 8)
+        if (transform.position.y > Camera.main.transform.position.y && System.Math.Abs(transform.position.y - Camera.main.transform.position.y) > 12)
             if (inputY > 0)
                 inputY = 0;
 

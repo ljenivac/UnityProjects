@@ -41,7 +41,9 @@ public class EnemyScript : MonoBehaviour
         }
 
         if (transform.position.x < Camera.main.transform.position.x && System.Math.Abs(transform.position.x - Camera.main.transform.position.x) > 25)
+        {
             Destroy(gameObject);
+        }
     }
 
     void OnBecameInvisible()

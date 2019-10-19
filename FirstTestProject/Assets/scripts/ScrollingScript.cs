@@ -10,6 +10,8 @@ public class ScrollingScript : MonoBehaviour
     /// Scrolling speed
     /// </summary>
     public Vector2 speed = new Vector2(10, 10);
+    private Vector2 origSpeed = new Vector2(10, 10);
+    private Vector2 zeroSpeed = new Vector2(0, 0);
 
     /// <summary>
     /// Moving direction
@@ -40,6 +42,7 @@ public class ScrollingScript : MonoBehaviour
     {
 
         timeCount = System.DateTime.Now.Second;
+        origSpeed = speed;
         // For infinite background only
         if (isLooping)
         {
@@ -70,16 +73,31 @@ public class ScrollingScript : MonoBehaviour
 
     void Update()
     {
+        //if (isTimeStopped)
+        //{
+        //    int currentTime = System.DateTime.Now.Second;
+        //    if ((currentTime - timeCount) >= 2)
+        //        isTimeStopped = false;
+        //    else
+        //        return;
+        //}
         if (isTimeStopped)
         {
             int currentTime = System.DateTime.Now.Second;
             if ((currentTime - timeCount) >= 2)
+            {
+                speed = origSpeed;
                 isTimeStopped = false;
+            }
             else
-                return;
+                speed = zeroSpeed;
+        }
+        else
+        {
+            timeCount = System.DateTime.Now.Second;
+            speed = origSpeed;
         }
 
-        timeCount = System.DateTime.Now.Second;
         if (timeCount > 57)
             timeCount -= 60;
         // Movement
@@ -98,7 +116,7 @@ public class ScrollingScript : MonoBehaviour
         }
 
         // 4 - Loop
-        if (isLooping)
+        /*if (isLooping)
         {
             // Get the first object.
             // The list is ordered from left (x position) to right.
@@ -125,13 +143,73 @@ public class ScrollingScript : MonoBehaviour
                         // Set the position of the recyled one to be AFTER
                         // the last child.
                         // Note: Only work for horizontal scrolling currently.
-                        firstChild.transform.position = new Vector3(lastPosition.x + lastSize.x, firstChild.transform.position.y, firstChild.transform.position.z);
+                        //firstChild.transform.position = new Vector3(lastPosition.x + lastSize.x, firstChild.transform.position.y, firstChild.transform.position.z);
+                        firstChild.transform.position = new Vector3(firstChild.transform.position.x + 60f, firstChild.transform.position.y, firstChild.transform.position.z);
 
                         // Set the recycled child to the last position
                         // of the backgroundPart list.
                         backgroundPart.Remove(firstChild);
                         backgroundPart.Add(firstChild);
                     }
+                }
+            }
+        }*/
+        /*if (isLooping)
+        {
+            // Get the first object.
+            // The list is ordered from left (x position) to right.
+
+            SpriteRenderer firstChild = backgroundPart.FirstOrDefault();
+
+            if (firstChild != null)
+            {
+                // Check if the child is already (partly) before the camera.
+                // We test the position first because the IsVisibleFrom
+                // method is a bit heavier to execute.
+                if (firstChild.transform.position.x < Camera.main.transform.position.x && System.Math.Abs(firstChild.transform.position.x - Camera.main.transform.position.x) > 30f)
+                {
+                    firstChild.transform.position = new Vector3(firstChild.transform.position.x + 60f, firstChild.transform.position.y, firstChild.transform.position.z);
+
+                    backgroundPart.Remove(firstChild);
+                    backgroundPart.Add(firstChild);
+                    // If the child is already on the left of the camera,
+                    // we test if it's completely outside and needs to be
+                    // recycled.
+                    //if (firstChild.IsVisibleFrom(Camera.main) == false)
+                    //{
+                    //    // Get the last child position.
+                    //    SpriteRenderer lastChild = backgroundPart.LastOrDefault();
+
+                    //    Vector3 lastPosition = lastChild.transform.position;
+                    //    Vector3 lastSize = (lastChild.bounds.max - lastChild.bounds.min);
+
+                    //    // Set the position of the recyled one to be AFTER
+                    //    // the last child.
+                    //    // Note: Only work for horizontal scrolling currently.
+                    //    //firstChild.transform.position = new Vector3(lastPosition.x + lastSize.x, firstChild.transform.position.y, firstChild.transform.position.z);
+                    //    firstChild.transform.position = new Vector3(firstChild.transform.position.x + 60f, firstChild.transform.position.y, firstChild.transform.position.z);
+
+                    //    // Set the recycled child to the last position
+                    //    // of the backgroundPart list.
+                    //    backgroundPart.Remove(firstChild);
+                    //    backgroundPart.Add(firstChild);
+                    //}
+                }
+            }
+        }*/
+        if (isLooping)
+        {
+            // Get the first object.
+            // The list is ordered from left (x position) to right.
+
+            foreach (SpriteRenderer sprite in backgroundPart)
+            {
+                if (sprite.transform.position.x < Camera.main.transform.position.x && System.Math.Abs(sprite.transform.position.x - Camera.main.transform.position.x) > 30f)
+                {
+                    sprite.transform.position = new Vector3(sprite.transform.position.x + 60f, sprite.transform.position.y, sprite.transform.position.z);
+
+                    backgroundPart.Remove(sprite);
+                    backgroundPart.Add(sprite);
                 }
             }
         }

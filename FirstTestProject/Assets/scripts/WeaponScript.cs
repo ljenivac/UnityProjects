@@ -33,7 +33,7 @@ public class WeaponScript : MonoBehaviour
 
     void Update()
     {
-        if (shootCooldown > -1.0f)
+        if (shootCooldown > 0f)
         {
             shootCooldown -= Time.deltaTime;
         }
@@ -78,7 +78,7 @@ public class WeaponScript : MonoBehaviour
     {
         if (CanHomingAttack)
         {
-            shootCooldown = shootingRate;
+            shootCooldown = shootingRate + 0.5f;
 
             // Create a new shot
             homingShotTransform = Instantiate(homingShotPrefab) as Transform;
@@ -111,7 +111,7 @@ public class WeaponScript : MonoBehaviour
     {
         get
         {
-            return (shootCooldown + 1.0f) <= 0f;
+            return shootCooldown <= 0f;
         }
     }
 }
