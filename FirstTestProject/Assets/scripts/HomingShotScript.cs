@@ -27,13 +27,16 @@ public class HomingShotScript : MonoBehaviour
     {
         MoveScript move = gameObject.GetComponent<MoveScript>();
         GameObject gos = FindClosestEnemy();
-        target = gos.transform;
+        if(gos != null)
+        {
+            target = gos.transform;
 
-        Vector2 direction = (Vector2)target.position - rb.position;
-        direction.Normalize();
-        float rotateAmount = Vector3.Cross(direction, transform.up).z;
-        rb.angularVelocity = -rotateAmount*rotateSpeed;
-        move.direction = (Vector2)transform.up;
+            Vector2 direction = (Vector2)target.position - rb.position;
+            direction.Normalize();
+            float rotateAmount = Vector3.Cross(direction, transform.up).z;
+            rb.angularVelocity = -rotateAmount * rotateSpeed;
+            move.direction = (Vector2)transform.up;
+        }
         //move.direction.x = transform.up.x;
         //move.direction.y = transform.up.y;
         // rb.velocity = transform.up * speed;

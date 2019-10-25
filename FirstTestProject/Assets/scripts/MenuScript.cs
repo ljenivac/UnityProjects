@@ -10,4 +10,13 @@ public class MenuScript : MonoBehaviour
         // "Stage1" is the name of the first scene we created.
         Application.LoadLevel("SampleScene");
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape");
+            Application.LoadLevel("Menu");
+        }
+    }
 }

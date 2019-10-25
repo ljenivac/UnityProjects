@@ -208,8 +208,8 @@ public class ScrollingScript : MonoBehaviour
                 {
                     sprite.transform.position = new Vector3(sprite.transform.position.x + 60f, sprite.transform.position.y, sprite.transform.position.z);
 
-                    backgroundPart.Remove(sprite);
-                    backgroundPart.Add(sprite);
+                    //backgroundPart.Remove(sprite);
+                    //backgroundPart.Add(sprite);
                 }
             }
         }

@@ -9,7 +9,7 @@ public class RestartScript : MonoBehaviour
 
     public void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void Update()
@@ -26,5 +26,10 @@ public class RestartScript : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

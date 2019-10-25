@@ -24,19 +24,32 @@ public class EnemyScript : MonoBehaviour
           rand.Next(-2, 2),
           0);
 
+        timeCount = System.DateTime.Now.Second;
         //transform.Translate(movement);
     }
 
     void Update()
     {
-
-        foreach (WeaponScript weapon in weapons)
+        if (isTimeStopped)
         {
-            // Auto-fire
-            if (weapon != null && weapon.CanAttack)
+            int currentTime = System.DateTime.Now.Second;
+            if ((currentTime - timeCount) >= 2)
+                isTimeStopped = false;
+        }
+        else
+        {
+            timeCount = System.DateTime.Now.Second;
+            if (timeCount > 57)
+                timeCount -= 60;
+
+            foreach (WeaponScript weapon in weapons)
             {
-                weapon.Attack(true);
-                SoundEffectsHelper.Instance.MakeEnemyShotSound();
+                // Auto-fire
+                if (weapon != null && weapon.CanAttack)
+                {
+                    weapon.Attack(true);
+                    SoundEffectsHelper.Instance.MakeEnemyShotSound();
+                }
             }
         }
 

@@ -8,11 +8,26 @@ public class EnemySpawnerScript : MonoBehaviour
     public float spawnRate = 2f;
     float randY;
     Vector2 whereToSpawn;
-    float nextSpawn = 0.0f;
+    public float initialSpawn = 0.0f;
+    public float nextSpawn = 0.0f;
     // Start is called before the first frame update
+    /*void Start()
+    {
+        StartCoroutine(Example());
+    }
+
+    IEnumerator Example()
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(8);
+        //SceneManager.LoadScene("Menu");
+    }*/
     void Start()
     {
-        
+        if (initialSpawn == 0)
+            nextSpawn = 0;
+        else
+            nextSpawn = Time.time + initialSpawn;
     }
 
     // Update is called once per frame

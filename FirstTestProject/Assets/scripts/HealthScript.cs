@@ -44,6 +44,17 @@ public class HealthScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
 
+        //is this a heart?
+        LifeItemScript lifeItem = otherCollider.gameObject.GetComponent<LifeItemScript>();
+        if(lifeItem != null)
+        {
+            if(!isEnemy)
+            {
+                hp++;
+                Destroy(otherCollider.gameObject);
+            }
+        }
+
         // Is this a shot?
         ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();
         if (shot != null)
